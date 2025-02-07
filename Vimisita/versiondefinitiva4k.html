@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentín para Vimi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6f2;
+            overflow: hidden;
+        }
+        .heart {
+            font-size: 80px;
+            color: red;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 20%;
+            transition: transform 0.3s;
+            position: relative;
+        }
+        .heart span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            color: white;
+        }
+        .heart:hover {
+            transform: scale(1.2);
+        }
+        .falling-heart {
+            position: absolute;
+            color: red;
+            font-size: 30px;
+            animation: fall linear infinite;
+        }
+        .falling-heart span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            color: white;
+        }
+        @keyframes fall {
+            from { transform: translateY(-100px); opacity: 1; }
+            to { transform: translateY(100vh); opacity: 0; }
+        }
+        .hidden {
+            display: none;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        #btnSi { background-color: #ff66b2; color: white; }
+        #btnNo { background-color: #ff3333; color: white; }
+    </style>
+</head>
+<body>
+    <div id="inicio">
+        <div class="heart" onclick="mostrarMensaje()">❤️<span>V</span></div>
+    </div>
+    
+    <div id="mensaje" class="hidden">
+        <h1>Para Vimi, la Niña más Hermosa que existe</h1>
+        <p>Amor, se viene una fecha muy especial, el día del amor y la amistad. Es curioso que empezamos esto como una amistad, una cosa de amigos, y nuestro primer día del amor lo pasaremos como pareja. Eres una persona magnífica y te quiero muchísimo ❤, por eso te quiero hacer la pregunta tan importante:</p>
+        <h2>¿Quieres ser mi San Valentín?</h2>
+        <button id="btnSi" onclick="respuestaSi()">Sí</button>
+        <button id="btnNo" onclick="cambiarNo()">No</button>
+    </div>
+
+    <div id="final" class="hidden">
+        <h2 style="color: #ff66b2;">Te quiero mucho, mi niña hermosa 💖</h2>
+    </div>
+
+    <script>
+        function mostrarMensaje() {
+            document.getElementById("inicio").classList.add("hidden");
+            document.getElementById("mensaje").classList.remove("hidden");
+            lanzarCorazones();
+        }
+        
+        function lanzarCorazones() {
+            for (let i = 0; i < 30; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("falling-heart");
+                heart.innerHTML = "❤️<span>H</span>";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }
+        }
+        
+        function respuestaSi() {
+            document.getElementById("mensaje").classList.add("hidden");
+            document.getElementById("final").classList.remove("hidden");
+        }
+        
+        function cambiarNo() {
+            let btnNo = document.getElementById("btnNo");
+            btnNo.innerHTML = "Sí";
+            btnNo.style.backgroundColor = "#ff66b2";
+            btnNo.onclick = respuestaSi;
+        }
+    </script>
+</body>
+</html>
